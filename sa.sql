@@ -53,15 +53,16 @@ CREATE TABLE vendedores (
     nome VARCHAR(255) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     email VARCHAR(255),
-    genero ENUM('M', 'F', 'Outro') DEFAULT 'Outro'
+    genero ENUM('M', 'F', 'Outro') DEFAULT 'Outro',
+    senha varchar(255)
 );
 
 -- Inserção de dados de exemplo na tabela vendedores
 INSERT INTO vendedores (nome, cpf, email, genero) VALUES
-('Mariana Costa', '321.654.987-00', 'mariana.costa@empresa.com', 'F'),
-('João Ferreira', '456.789.123-11', 'joao.ferreira@empresa.com', 'M'),
-('Lucas Silva', '789.123.456-22', 'lucas.silva@empresa.com', 'M'),
-('Beatriz Mendes', '159.753.486-33', 'beatriz.mendes@empresa.com', 'F');
+('Mariana Costa', '321.654.987-00', 'mariana.costa@empresa.com', 'F', '12345678'),
+('João Ferreira', '456.789.123-11', 'joao.ferreira@empresa.com', 'M', '12345677'),
+('Lucas Silva', '789.123.456-22', 'lucas.silva@empresa.com', 'M', '12341234'),
+('Beatriz Mendes', '159.753.486-33', 'beatriz.mendes@empresa.com', 'F', '87654321');
 
 
 -- Inserção de dados de exemplo na tabela clientes
