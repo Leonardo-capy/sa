@@ -1,20 +1,3 @@
--- Create the database
--- CREATE DATABASE IF NOT EXISTS mysqlproduto;
-
--- Use the database
--- USE mysqlproduto;
-
--- Create the produto table
--- CREATE TABLE IF NOT EXISTS produto (
-  --  id INT AUTO_INCREMENT PRIMARY KEY,
- --   nome VARCHAR(255) NOT NULL,
- --   preco DECIMAL(10,2) NOT NULL,
- --   categoria VARCHAR(100) NOT NULL
--- );
-
--- Insert data into the produto table
--- Corrected INSERT statement:
--- INSERT INTO produto (nome, preco, categoria) VALUES ('Lucca', 13122.00, 'Humano');
 
 DROP database gerenciamento_produtos;
 
@@ -31,15 +14,7 @@ CREATE TABLE categorias (
 );
 
 
--- Tabela: clientes
-CREATE TABLE clientes (
-id INT auto_increment primary KEY,
-nome varchar(255) NOT NULL,
-cpf varchar(14) not null unique,
-email varchar(255),
-endereco TEXT,
-segenero ENUM ('M', 'F') default'Helicoptero de Combate Russo Alemão criado a 2000 anos atrás'
-);
+
 
 -- Tabela: fornecedores
 CREATE TABLE fornecedores (
@@ -62,9 +37,43 @@ CREATE TABLE produtos (
     FOREIGN KEY (id_fornecedor) REFERENCES fornecedores(id) ON DELETE SET NULL
 );
 
-DROP TABLE fornecedores;
+-- Tabela: clientes
+CREATE TABLE clientes (
+id INT auto_increment primary KEY,
+nome varchar(255) NOT NULL,
+cpf varchar(14) not null unique,
+email varchar(255),
+endereco TEXT,
+segenero ENUM ('M', 'F', 'Helicoptero de Combate Russo Alemão criado a 2000 anos atrás') default'Helicoptero de Combate Russo Alemão criado a 2000 anos atrás'
+);
 
--- Inserção de dados de exemplo na tabela categorias (sem 'Móveis')
+-- Tabela: vendedores
+CREATE TABLE vendedores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    email VARCHAR(255),
+    genero ENUM('M', 'F', 'Outro') DEFAULT 'Outro'
+);
+
+-- Inserção de dados de exemplo na tabela vendedores
+INSERT INTO vendedores (nome, cpf, email, genero) VALUES
+('Mariana Costa', '321.654.987-00', 'mariana.costa@empresa.com', 'F'),
+('João Ferreira', '456.789.123-11', 'joao.ferreira@empresa.com', 'M'),
+('Lucas Silva', '789.123.456-22', 'lucas.silva@empresa.com', 'M'),
+('Beatriz Mendes', '159.753.486-33', 'beatriz.mendes@empresa.com', 'F');
+
+
+-- Inserção de dados de exemplo na tabela clientes
+INSERT INTO clientes (nome, cpf, email, endereco, segenero) VALUES 
+('Jonny', '123.456.789-01', 'jonnybravo123@gmail.com','Rua Linguiça Mensais, 914, Bem te vi, Xique Xique, Bahia', 'M'),
+('Lucca', '123.456.789-02', 'luccabravo123@gmail.com','Rua Boboleta Psicodélicas, 570, Liberdade, São Paulo, São Paulo', 'M'),
+('Ashley', '123.456.789-03', 'ashleybrava123@gmail.com','Rua Travessa Maravilha Tristeza, 2506, Liberdade, São Paulo, São Paulo', 'F'),
+('Riley', '123.456.789-04', 'rileybrave123@gmail.com','Rua Travessa Sonho de um Carnaval, 1421, Tatuapé, São Paulo, São Paulo', '');
+
+
+
+-- Inserção de dados de exemplo na tabela categorias
 INSERT INTO categorias (nome) VALUES
 ('Eletrônicos'),
 ('Roupas'),
@@ -72,13 +81,13 @@ INSERT INTO categorias (nome) VALUES
 ('Livros');
 
 -- Inserção de dados de exemplo na tabela fornecedores
-INSERT INTO fornecedores (nome, contato) VALUES
-('Tech Supplies Ltda.', 'contato@techsupplies.com'),
-('Fashion Wear S.A.', 'vendas@fashionwear.com'),
-('Food Distributors Inc.', 'info@fooddist.com'),
-('Book Haven Editora', 'editora@bookhaven.com');
+INSERT INTO fornecedores (nome, contato, avaliacao) VALUES
+('Tech Supplies Ltda.', 'contato@techsupplies.com', 4.2),
+('Fashion Wear S.A.', 'vendas@fashionwear.com', 2.6),
+('Food Distributors Inc.', 'info@fooddist.com', 5.0),
+('Book Haven Editora', 'editora@bookhaven.com', 3.5);
 
--- Inserção de dados de exemplo na tabela produtos (sem produtos da categoria 'Móveis')
+-- Inserção de dados de exemplo na tabela produtos 
 INSERT INTO produtos (nome, descricao, preco, quantidade_estoque, id_categoria, id_fornecedor) VALUES
 ('Smartphone X', 'Última geração de smartphones com câmera de alta resolução.', 1200.00, 50, 1, 1),
 ('Camiseta Algodão', 'Camiseta 100% algodão, confortável e durável.', 45.90, 200, 2, 2),
